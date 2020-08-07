@@ -1,12 +1,13 @@
-import React from 'react';
-import useForm from '../utils/useForm';
+import React, { useState } from 'react';
 
 const FormRequest = () => {
-    const {values, handleChange} = useForm();
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-  const request = () => {
-    console.log({ values });
-  }
+  const request = (e) => {
+    e.preventDefault();
+    console.log({ email, message });
+  };
 
   return (
     <div>
@@ -31,8 +32,8 @@ const FormRequest = () => {
               type="text"
               name="email"
               placeholder="Email Address"
-              onChange={handleChange}
-              value={values.email || ""}
+              onChange={e => setEmail(e.target.value)}
+              value={email}
               required
             />
           </div>
@@ -48,15 +49,15 @@ const FormRequest = () => {
               name="message"
               type="text"
               placeholder="Tell us your purpose"
-              onChange={handleChange}
-              value={values.message || ""}
+              onChange={e => setMessage(e.target.value)}
+              value={message}
               required
             />
           </div>
           <div className="flex items-center justify-between">
             <button
               className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 mt-6 w-full rounded focus:outline-none focus:shadow-outline"
-              type="button"
+              type="submit"
             >
               Send A Request
             </button>
