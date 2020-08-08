@@ -6,5 +6,14 @@
   "dependencies": {
     "express": "^4.17.1",
     "nodemailer": "^6.4.11"
+  },
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }

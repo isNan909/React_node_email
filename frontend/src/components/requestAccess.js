@@ -4,9 +4,23 @@ const FormRequest = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const request = (e) => {
+  const submitRequest = async (e) => {
     e.preventDefault();
     console.log({ email, message });
+    const response = await fetch("/access", { 
+      method: 'POST', 
+      headers: { 
+          'Content-type': 'application/json'
+      }, 
+      body: JSON.stringify({email, message}) 
+  }); 
+    const resData = await response.json(); 
+    if (resData.status === 'success'){
+      alert("Message Sent."); 
+      this.resetForm()
+  }else if(resData.status === 'fail'){
+      alert("Message failed to send.")
+  }
   };
 
   return (
@@ -15,7 +29,7 @@ const FormRequest = () => {
       <div className="w-full max-w-sm m-auto flex flex-col my-32">
         <form
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border-gray-200 border"
-          onSubmit={request}
+          onSubmit={submitRequest}
         >
           <h2 className="text-2xl pt-6 pb-10 text-center font-medium text-gray-800">
             Request for early access

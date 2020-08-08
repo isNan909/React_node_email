@@ -3,12 +3,15 @@ import { useState } from 'react';
 const useForm = () => {
   const [values, setValues] = useState({});
 
-  const handleChange = (e) => {
-    e.persist();
-    setValues((values) => ({ ...values, [e.target.name]: e.target.value }));
+  const handleChange = (event) => {
+    event.persist();
+    setValues((values) => ({ ...values, [event.target.name]: event.target.value }));
   };
 
-  return {handleChange, values};
+  return {
+    handleChange,
+    values,
+  };
 };
 
 export default useForm;
